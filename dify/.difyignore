@@ -1,0 +1,17 @@
+# Development files that stay out of the .difypkg
+tests/
+.env
+.env.*
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.difypkg
+.git/
+.gitignore
+.DS_Store
+.idea/
+.vscode/

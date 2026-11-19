@@ -1,0 +1,31 @@
+identity:
+  name: download_file
+  author: instabox
+  label:
+    en_US: Download File
+description:
+  human:
+    en_US: Download a file from an instabox sandbox into Dify.
+  llm: Download a file from an existing instabox sandbox and return it as a Dify file, for example a chart or a report a program made.
+parameters:
+  - name: sandbox_id
+    type: string
+    required: true
+    label:
+      en_US: Sandbox ID or Name
+    human_description:
+      en_US: The sandbox to download from.
+    llm_description: The ID (m_...) or name of an existing sandbox, for example from Create Sandbox.
+    form: llm
+  - name: path
+    type: string
+    required: true
+    label:
+      en_US: Path
+    human_description:
+      en_US: The path of the file in the sandbox. A relative path starts at /data/home.
+    llm_description: The path of the file in the sandbox. A relative path starts at /data/home.
+    form: llm
+extra:
+  python:
+    source: tools/download_file.py

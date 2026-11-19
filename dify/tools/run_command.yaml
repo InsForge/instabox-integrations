@@ -1,0 +1,79 @@
+identity:
+  name: run_command
+  author: instabox
+  label:
+    en_US: Run Command
+description:
+  human:
+    en_US: Run a shell command in an instabox sandbox and get its stdout, stderr and exit code.
+  llm: >-
+    Run a bash command in an instabox sandbox. The default sandbox is Debian 13 with Python 3, Node.js, Bun, Go, Java and git, user "user" and home /data/home.
+    Returns stdout, stderr and exit_code separately. A non-zero exit code is a result, not an error.
+    Without sandbox_id the command runs in a new sandbox that is deleted afterwards, so nothing is kept.
+parameters:
+  - name: command
+    type: string
+    required: true
+    label:
+      en_US: Command
+    human_description:
+      en_US: The bash command to run.
+    llm_description: The bash command to run. Pipes, && and redirects work.
+    form: llm
+  - name: sandbox_id
+    type: string
+    required: false
+    label:
+      en_US: Sandbox ID or Name
+    human_description:
+      en_US: An existing sandbox. Leave empty to run in a new sandbox that is deleted afterwards.
+    llm_description: The ID (m_...) or name of an existing sandbox, for example from Create Sandbox. Leave empty to use a new sandbox for this call only.
+    form: llm
+    default: ""
+  - name: cwd
+    type: string
+    required: false
+    label:
+      en_US: Working Directory
+    human_description:
+      en_US: The directory to run in. Default /data/home.
+    llm_description: Absolute directory to run the command in. Default /data/home.
+    form: llm
+    default: ""
+  - name: stdin
+    type: string
+    required: false
+    label:
+      en_US: Standard Input
+    human_description:
+      en_US: Text sent to the command on stdin.
+    llm_description: Optional text sent to the command on stdin.
+    form: llm
+    default: ""
+  - name: timeout
+    type: number
+    required: false
+    label:
+      en_US: Timeout (seconds)
+    human_description:
+      en_US: Stop the command after this many seconds, 1 to 600. Default 120.
+    llm_description: Stop the command after this many seconds (1 to 600, default 120). Use more for installs and builds.
+    form: llm
+    default: 120
+    min: 1
+    max: 600
+output_schema:
+  type: object
+  properties:
+    stdout:
+      type: string
+      description: What the command wrote to stdout.
+    stderr:
+      type: string
+      description: What the command wrote to stderr.
+    exit_code:
+      type: number
+      description: The exit code of the command.
+extra:
+  python:
+    source: tools/run_command.py

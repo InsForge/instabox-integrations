@@ -1,0 +1,88 @@
+identity:
+  name: run_code
+  author: instabox
+  label:
+    en_US: Run Code
+description:
+  human:
+    en_US: Run a Python, JavaScript, TypeScript, Bash, Go or Java program in an instabox sandbox.
+  llm: >-
+    Run a complete program in an instabox sandbox and return its stdout, stderr and exit_code. Print what you want to see.
+    Python 3, Node.js, Bun (for TypeScript), Bash, Go and Java are installed in the default sandbox.
+    Without sandbox_id the program runs in a new sandbox that is deleted afterwards, so nothing is kept.
+parameters:
+  - name: code
+    type: string
+    required: true
+    label:
+      en_US: Code
+    human_description:
+      en_US: The program to run.
+    llm_description: The complete program to run. Print the results to stdout.
+    form: llm
+  - name: language
+    type: select
+    required: false
+    label:
+      en_US: Language
+    human_description:
+      en_US: The language of the program. Default Python.
+    llm_description: One of python, javascript, typescript, bash, go, java. Default python.
+    form: llm
+    default: python
+    options:
+      - value: python
+        label:
+          en_US: Python
+      - value: javascript
+        label:
+          en_US: JavaScript
+      - value: typescript
+        label:
+          en_US: TypeScript
+      - value: bash
+        label:
+          en_US: Bash
+      - value: go
+        label:
+          en_US: Go
+      - value: java
+        label:
+          en_US: Java
+  - name: sandbox_id
+    type: string
+    required: false
+    label:
+      en_US: Sandbox ID or Name
+    human_description:
+      en_US: An existing sandbox. Leave empty to run in a new sandbox that is deleted afterwards.
+    llm_description: The ID (m_...) or name of an existing sandbox, for example from Create Sandbox. Leave empty to use a new sandbox for this call only.
+    form: llm
+    default: ""
+  - name: timeout
+    type: number
+    required: false
+    label:
+      en_US: Timeout (seconds)
+    human_description:
+      en_US: Stop the program after this many seconds, 1 to 600. Default 120.
+    llm_description: Stop the program after this many seconds (1 to 600, default 120).
+    form: llm
+    default: 120
+    min: 1
+    max: 600
+output_schema:
+  type: object
+  properties:
+    stdout:
+      type: string
+      description: What the program wrote to stdout.
+    stderr:
+      type: string
+      description: What the program wrote to stderr.
+    exit_code:
+      type: number
+      description: The exit code of the program.
+extra:
+  python:
+    source: tools/run_code.py

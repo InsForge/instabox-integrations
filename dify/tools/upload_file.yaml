@@ -1,0 +1,47 @@
+identity:
+  name: upload_file
+  author: instabox
+  label:
+    en_US: Upload File
+description:
+  human:
+    en_US: Upload a file from Dify into an instabox sandbox.
+  llm: Upload a file from Dify into an existing instabox sandbox. Returns the absolute path of the file in the sandbox.
+parameters:
+  - name: sandbox_id
+    type: string
+    required: true
+    label:
+      en_US: Sandbox ID or Name
+    human_description:
+      en_US: The sandbox to upload to.
+    llm_description: The ID (m_...) or name of an existing sandbox, for example from Create Sandbox.
+    form: llm
+  - name: file
+    type: file
+    required: true
+    label:
+      en_US: File
+    human_description:
+      en_US: The file to upload.
+    llm_description: The file to upload.
+    form: llm
+  - name: path
+    type: string
+    required: false
+    label:
+      en_US: Path
+    human_description:
+      en_US: Where to put the file. A path ending in / is a directory. Default /data/home/ and the file name.
+    llm_description: Where to put the file in the sandbox. A path ending in / is a directory. A relative path starts at /data/home. Default /data/home/<file name>.
+    form: llm
+    default: ""
+output_schema:
+  type: object
+  properties:
+    path:
+      type: string
+      description: The absolute path of the file in the sandbox.
+extra:
+  python:
+    source: tools/upload_file.py

@@ -1,0 +1,2 @@
+dify-plugin==0.11.1
+instabox-sdk==0.5.6

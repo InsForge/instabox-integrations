@@ -1,0 +1,27 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.InsForge/instabox",
+  "title": "InstaBox",
+  "description": "Cloud Linux sandboxes for agents: create machines, run commands, move files, pause and snapshot.",
+  "version": "1.0.0",
+  "websiteUrl": "https://instabox.sh/docs/mcp",
+  "repository": {
+    "url": "https://github.com/InsForge/instabox-integrations",
+    "source": "github",
+    "subfolder": "mcp-registry"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://api.instabox.sh/mcp",
+      "headers": [
+        {
+          "name": "X-API-Key",
+          "description": "instabox API key (ibk_...), from API keys in the dashboard at https://dashboard.instabox.sh",
+          "isRequired": true,
+          "isSecret": true
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+name: instabox
+label: instabox
+kind: backend
+version: 0.1.0
+author: InsForge
+license: Apache-2.0
+homepage: https://github.com/InsForge/instabox-integrations/tree/main/hermes
+description: >
+  instabox terminal backend for Hermes Agent: the terminal, file and code tools
+  run in an instabox cloud sandbox while the agent stays on your machine.
+  Select it with `terminal.backend: instabox`. With
+  `terminal.container_persistent: true` each task's box is paused on exit and
+  resumed by name. With `false` each session gets its own box, deleted when the
+  session ends.
+requires_hermes: ">=0.22.3"
+requires_env:
+  - name: INSTABOX_API_KEY
+    description: "instabox API key (dashboard, API keys)"
+    url: "https://dashboard.instabox.sh"
+    secret: true
+provides_tools: []
+provides_hooks: []
+config_keys:
+  - terminal.instabox_template
+  - terminal.instabox_vcpus
+  - terminal.instabox_mem_mib
+  - terminal.instabox_name_prefix
+  - terminal.instabox_delete_after_seconds

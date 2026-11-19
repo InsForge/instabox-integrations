@@ -1,0 +1,22 @@
+identity:
+  name: delete_sandbox
+  author: instabox
+  label:
+    en_US: Delete Sandbox
+description:
+  human:
+    en_US: Delete a sandbox that this plugin created, with all its files.
+  llm: Permanently delete an instabox sandbox and its files. Only sandboxes created by this plugin can be deleted.
+parameters:
+  - name: sandbox_id
+    type: string
+    required: true
+    label:
+      en_US: Sandbox ID or Name
+    human_description:
+      en_US: The sandbox to delete.
+    llm_description: The ID (m_...) or name of a sandbox from Create Sandbox.
+    form: llm
+extra:
+  python:
+    source: tools/delete_sandbox.py

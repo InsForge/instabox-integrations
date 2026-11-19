@@ -1,0 +1,71 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-instabox"
+description = "instabox sandbox integration for Deep Agents"
+license = { text = "Apache-2.0" }
+readme = "README.md"
+authors = [{ name = "instabox" }]
+keywords = ["deepagents", "langchain", "sandbox", "instabox", "agents"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Typing :: Typed",
+]
+dynamic = ["version"]
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "deepagents>=0.7.30,<0.8.0",
+    "instabox-sdk>=0.5.6,<0.6.0",
+]
+
+[project.entry-points."deepagents_code.sandbox_providers"]
+instabox = "langchain_instabox.provider:InstaboxProvider"
+
+[project.urls]
+Homepage = "https://instabox.sh"
+Documentation = "https://github.com/InsForge/instabox-integrations/tree/main/langchain#readme"
+Repository = "https://github.com/InsForge/instabox-integrations"
+
+[dependency-groups]
+test = [
+    "pytest>=8.3.4,<10.0.0",
+    "pytest-asyncio>=1.3.0",
+    "pytest-socket",
+    "pytest-timeout>=2.3.1,<3.0.0",
+    "ruff>=0.14.0,<0.16.0",
+    "langchain-tests>=1.1.6",
+]
+
+[tool.hatch.version]
+path = "langchain_instabox/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["langchain_instabox"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "D", "ANN", "S", "PL"]
+ignore = ["PLR0913"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.extend-per-file-ignores]
+"tests/**/*.py" = ["D", "S101", "ANN", "PLR2004"]
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config --durations=5"
+testpaths = ["tests"]
+asyncio_mode = "auto"

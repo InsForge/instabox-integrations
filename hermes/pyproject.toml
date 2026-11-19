@@ -1,0 +1,27 @@
+[project]
+name = "instabox-hermes"
+version = "0.1.0"
+description = "instabox terminal backend for Hermes Agent"
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "InsForge" }]
+requires-python = ">=3.11"
+dependencies = [
+    "instabox-sdk>=0.5,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/InsForge/instabox-integrations/tree/main/hermes"
+Repository = "https://github.com/InsForge/instabox-integrations"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.ruff.lint.isort]
+# Hermes core packages resolve from a hermes-agent checkout, not from this tree.
+known-first-party = ["instabox_hermes_plugin"]
+known-third-party = ["agent", "tools", "hermes_cli", "instabox"]

@@ -1,0 +1,54 @@
+identity:
+  name: create_sandbox
+  author: instabox
+  label:
+    en_US: Create Sandbox
+description:
+  human:
+    en_US: Create an instabox sandbox that the other tools can use across several steps.
+  llm: >-
+    Create an instabox sandbox (a Debian 13 cloud machine with Python, Node.js, Bun, Go, Java and git) and return its sandbox_id.
+    Pass the sandbox_id to the other tools to keep files and installed packages between steps.
+    Delete it with Delete Sandbox when you are done.
+parameters:
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Name
+    human_description:
+      en_US: The sandbox name, unique in your workspace. Leave empty for a name like dify-1a2b3c4d.
+    llm_description: Optional sandbox name with lowercase letters, digits and hyphens. Leave empty to generate one.
+    form: llm
+    default: ""
+  - name: template
+    type: string
+    required: false
+    label:
+      en_US: Template
+    human_description:
+      en_US: The instabox template to start from. Leave empty for agent-browser, the default.
+    llm_description: The instabox template. Leave empty for the default.
+    form: form
+    default: ""
+  - name: delete_after_seconds
+    type: number
+    required: false
+    label:
+      en_US: Delete After (seconds)
+    human_description:
+      en_US: instabox deletes the sandbox this many seconds after it is created, also when the workflow stops halfway. 60 to 86400, or 0 to keep it until you delete it. Default 3600.
+    llm_description: Safety net. instabox deletes the sandbox this many seconds after creation (60 to 86400, default 3600). 0 keeps it until it is deleted.
+    form: form
+    default: 3600
+    min: 0
+    max: 86400
+output_schema:
+  type: object
+  properties:
+    sandbox_id:
+      type: string
+      description: The ID of the new sandbox.
+extra:
+  python:
+    source: tools/create_sandbox.py

@@ -1,0 +1,32 @@
+identity:
+  author: instabox
+  name: instabox
+  label:
+    en_US: instabox
+  description:
+    en_US: Run commands and code in instabox cloud sandboxes, and move files in and out of them.
+  icon: icon.svg
+  icon_dark: icon-dark.svg
+  tags:
+    - utilities
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: API Key
+    placeholder:
+      en_US: ibk_...
+    help:
+      en_US: Create a key on the API keys page of the instabox dashboard. It needs the sandbox Read, Write and Delete permissions.
+    url: https://dashboard.instabox.sh
+tools:
+  - tools/run_command.yaml
+  - tools/run_code.yaml
+  - tools/upload_file.yaml
+  - tools/download_file.yaml
+  - tools/create_sandbox.yaml
+  - tools/delete_sandbox.yaml
+extra:
+  python:
+    source: provider/instabox.py
