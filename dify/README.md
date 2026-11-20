@@ -143,6 +143,11 @@ The plugin connects to the instabox API at `https://api.instabox.sh` (HTTPS,
 port 443). Dify must be able to reach that host. Sandboxes have outbound
 internet access.
 
+Upload File reads the file from Dify's file server. On a self-hosted Dify, set
+`FILES_URL`, or `INTERNAL_FILES_URL` (for example `http://api:5001` in the Docker
+setup), so the plugin can reach it. Without it, Upload File fails with
+`Ensure the FILES_URL environment variable is set`.
+
 ## How it works
 
 - The plugin is built on the [instabox Python SDK](https://pypi.org/project/instabox-sdk/).

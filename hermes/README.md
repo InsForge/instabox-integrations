@@ -25,6 +25,10 @@ The install asks for `INSTABOX_API_KEY` and saves it to your Hermes `.env`. Crea
 [`instabox-sdk`](https://pypi.org/project/instabox-sdk/) Python package, which Hermes installs from
 `pyproject.toml` after you consent. `hermes doctor` shows whether the SDK and the key are in place.
 
+To install without prompts, for example in a script, set `INSTABOX_API_KEY` first and run
+`hermes plugins install InsForge/instabox-integrations#hermes --yes-deps --enable`. Add
+`--ref <commit>` to pin a version.
+
 ## Configure
 
 The defaults work as they are. Every key is optional and lives under `terminal:` in
@@ -73,9 +77,9 @@ box without ripgrep.
   `<prefix>-<task id>-<random suffix>`, and deletes it when the session ends. The box lasts for the
   whole session, so files carry over from one turn to the next. The plugin only deletes the box it
   created in that session, by its ID.
-- **The first command of a session takes longer**, about 5 to 7 s in our tests: the box is
-  created or resumed, your Hermes files are uploaded as one archive and the shell is set up. Each
-  later command is one API round trip, about 0.8 s in our tests.
+- **The first command of a session takes longer**, 2 to 7 s in our tests: the box is created or
+  resumed, your Hermes files are uploaded as one archive and the shell is set up. Each later
+  command is one API round trip, 0.2 to 0.8 s in our tests.
 - **Output comes back when a command exits.** Stdout and stderr are merged, in order. instabox
   keeps the first 1 MiB of a command's output. Past that the output is cut and a note says so.
   Media that the gateway sends from the box is copied over the file API, with no such limit.
